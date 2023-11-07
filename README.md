@@ -2,7 +2,7 @@
 ## descrição do projeto 19/11
 <p align="center">
 • Serviço de chamada de procedimento remoto (RPC)<br>
-– O cliente deve ser capaz de listar os servi¸cos (funções) oferecidas pelo servidor
+– O cliente deve ser capaz de listar os serviços (funções) oferecidas pelo servidor
  <br>
 – O cliente deve implementar funções stub locais, reproduzindo a assinatura da funções (nome da função,
 tipos de parâmetros e de retorno)
@@ -14,7 +14,7 @@ que ser´a enviada ao servidor quando a função stub ´e chamada no programa
 resultado da função executada
 <br>
 – O cliente deve receber o resultado do RPC e retomar a execução do programa local, de maneira
-transparente (sem realizar nenhuma opera¸c˜ao de rede ou captura de exce¸c˜oes fora da função stub)
+transparente (sem realizar nenhuma operação de rede ou captura de exce¸c˜oes fora da função stub)
 <br>
 – Caso o servidor de RPC n˜ao responda em um intervalo especificado, o cliente deve retransmitir a
 requisição de RPC e aguardar pela resposta
