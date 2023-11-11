@@ -9,7 +9,7 @@ tipos de parâmetros e de retorno)
 <br>
 
 – A função de stub do cliente deve encapsular os parâmetros passados em uma mensagem de RPC,
-que ser´a enviada ao servidor quando a função stub ´e chamada no programa
+que será enviada ao servidor quando a função stub ´e chamada no programa
 <br>
 
 – O servidor deve escutar por mensagens de RPC, executˆando-as localmente e enviando de volta o
