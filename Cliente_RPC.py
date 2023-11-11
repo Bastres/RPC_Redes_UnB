@@ -21,12 +21,12 @@ class RPC_Cliente:
         except:
             pass
             
-    def __getattr__(self, __name: str):
-        def excecute(*args, **kwargs):
-            self.sock.sendall(json.dumps((__name, args, kwargs)).encode())
+    def __getattr__(self nome: str):
+        def excecutar(*args, **kwargs):
+            self.sock.sendall(json.dumps((nome, args, kwargs)).encode())
 
-            response = json.loads(self.sock.recv(SIZE).decode())
+            resposta = json.loads(self.sock.recv(SIZE).decode())
    
-            return response
+            return resposta
         
-        return excecute
+        return excecutar
