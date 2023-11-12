@@ -8,43 +8,33 @@ class Servidor_RPC:
         self.host = host
         self.porta = porta
         self.endereco = (host, porta)
-        self.metodos = {}
+        self._metodos = {}
         
     def registrarMetodo(self, funcao) -> None:
         try:
-            self.metodos.update({funcao.__name__ : funcao})
+            self._metodos.update({funcao.__name__ : funcao})
         except:
-            raise Exception('A non funcao object has been passed into RPCServidor.registrarMetodo(self, funcao)')    
+            raise Exception('Um objeto diferente de uma funcao foi repassado ao metodo Servidor_RPC.registrarMetodo(self, funcao)')
 
-    def registrarInstancia(self, instancia=None) -> None:
-        try:
-            # Regestring the instancia's methods
-            for nomeFuncao, funcao in inspect.getmembers(instancia, predicate=inspect.ismethod):
-                if not nomeFuncao.startswith('__'):
-                    self.metodos.update({nomeFuncao: funcao})
-        except:
-            raise Exception('A non class object has been passed into RPCServidor.registrarInstancia(self, instancia)')
-        
-    def __handle__(self, cliente:socket.socket, endereco:tuple) -> None:
-        print(f'Managing requests from {endereco}.')
+    def __gerenciador__(self, cliente:socket.socket, endereco:tuple) -> None:
+        print(f'Gerenciando requests do cliente {endereco[0]}:{endereco[1]}...\n')
+        print(f'> Cliente {endereco[0]}:{endereco[1]} conectou.')
         while True:
             try:
-                nomeFuncao, args, kwargs = json.loads(cliente.recv(SIZE).decode())
+                nomeFuncao, args, kwargs = json.loads(cliente.recv(1024).decode())
             except: 
-                print(f'! clientee {endereco} desconectou.')
+                print(f'> Cliente {endereco[0]}:{endereco[1]} desconectou.')
                 break
-            # Showing request Type
-            print(f'> {endereco} : {nomeFuncao}({args})')
+            print(f'> Cliente {endereco[0]}:{endereco[1]} solicitou {nomeFuncao}({args})')
 
             try:
-                response = self.metodos[nomeFuncao](*args, **kwargs)
+                response = self._metodos[nomeFuncao](*args, **kwargs)
             except Exception as e:
-                # Send back exeption if funcao called by cliente is not registred 
                 cliente.sendall(json.dumps(str(e)).encode())
             else:
                 cliente.sendall(json.dumps(response).encode())
 
-        print(f'Completed requests from {endereco}.')
+        print(f'\nOs requests do cliente {endereco[0]}:{endereco[1]} terminaram.\n')
         cliente.close()
         
     def iniciarServidor(self) -> None:
@@ -52,13 +42,34 @@ class Servidor_RPC:
             sock.bind(self.endereco)
             sock.listen()
 
-            print(f'Servidor {self.endereco} iniciando...')
+            print(f'\nIniciando servidor no host "{self.endereco[0]}" e porta "{self.endereco[1]}"...\n')
             while True:
                 try:
                     cliente, endereco = sock.accept()
 
-                    Thread(target=self.__handle__, args=[cliente, endereco]).start()
+                    Thread(target=self.__gerenciador__, args=[cliente, endereco]).start()
 
                 except KeyboardInterrupt:
-                    print(f'- Servidor {self.endereco} interrompido')
+                    print(f'\n\nServidor no host "{self.endereco[0]}" e porta "{self.endereco[1]}" interrompido.\n')
                     break
+                    
+def add(a,b):
+    return a+b
+
+def sub(a,b):
+    return a-b
+
+def mult(a,b):
+    return a*b
+
+def div(a,b):
+    return a/b
+
+server = Servidor_RPC()
+
+server.registrarMetodo(add)
+server.registrarMetodo(sub)
+server.registrarMetodo(mult)
+server.registrarMetodo(div)
+
+server.iniciarServidor()
