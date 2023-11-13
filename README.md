@@ -1,7 +1,7 @@
 # RPC_Redes_UnB
 ## Lista de requisitos funcionais do Projeto Chamada de Procedimento Remoto (RPC)
 
-– O cliente deve ser capaz de listar os serviços (funções) oferecidas pelo servidor;
+– O cliente deve ser capaz de listar os serviços (funções) oferecidas pelo servidor; ✓
  <br>
  
 – O cliente deve implementar funções stub locais, reproduzindo a assinatura da funções (nome da função,
