@@ -13,7 +13,7 @@ que será enviada ao servidor quando a função stub é chamada no programa;
 <br>
 
 – O servidor deve escutar por mensagens de RPC, executando-as localmente e enviando de volta o
-resultado da função executada;
+resultado da função executada; ✓
 <br>
 
 – O cliente deve receber o resultado do RPC e retomar a execução do programa local, de maneira
