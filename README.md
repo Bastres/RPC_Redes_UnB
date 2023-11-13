@@ -5,11 +5,11 @@
  <br>
  
 – O cliente deve implementar funções stub locais, reproduzindo a assinatura da funções (nome da função,
-tipos de parâmetros e de retorno);
+tipos de parâmetros e de retorno); ✓
 <br>
 
 – A função de stub do cliente deve encapsular os parâmetros passados em uma mensagem de RPC,
-que será enviada ao servidor quando a função stub é chamada no programa;
+que será enviada ao servidor quando a função stub é chamada no programa; ✓
 <br>
 
 – O servidor deve escutar por mensagens de RPC, executando-as localmente e enviando de volta o
