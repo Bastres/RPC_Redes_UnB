@@ -17,7 +17,7 @@ resultado da função executada; ✓
 <br>
 
 – O cliente deve receber o resultado do RPC e retomar a execução do programa local, de maneira
-transparente (sem realizar nenhuma operação de rede ou captura de exceções fora da função stub);
+transparente (sem realizar nenhuma operação de rede ou captura de exceções fora da função stub); ✓
 <br>
 
 – Caso o servidor de RPC não responda em um intervalo especificado, o cliente deve retransmitir a
