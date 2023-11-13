@@ -64,6 +64,9 @@ def mult(a,b):
 
 def div(a,b):
     return a/b
+    
+def listarMetodos():
+    return list(server._metodos)
 
 server = Servidor_RPC()
 
@@ -71,5 +74,6 @@ server.registrarMetodo(add)
 server.registrarMetodo(sub)
 server.registrarMetodo(mult)
 server.registrarMetodo(div)
+server.registrarMetodo(listarMetodos)
 
 server.iniciarServidor()
