@@ -38,9 +38,13 @@ client.conectar()
 
 while True:
     try:
-        x = int(input('O que deseja fazer?\n\n1. ADD\n2. SUB\n3. MULT\n4. DIV\n\n'))
+        x = int(input('\nO que deseja fazer?\n\n0. Listar funcoes cadastradas\n1. ADD\n2. SUB\n3. MULT\n4. DIV\n>'))
         
-        if x == 1:
+        if x == 0:
+            print('\nAs seguintes funcoes estao cadastradas em Servidor_RPC:')
+            print(client.listarMetodos())
+        
+        elif x == 1:
             try: 
                 a = int(input('\nEscolha o primeiro valor para a adicao:\n>'))
                 b = int(input('\nEscolha o segundo valor para a adicao:\n>'))
