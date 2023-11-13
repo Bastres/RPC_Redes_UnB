@@ -41,32 +41,43 @@ while True:
         x = int(input('O que deseja fazer?\n\n1. ADD\n2. SUB\n3. MULT\n4. DIV\n\n'))
         
         if x == 1:
+            try: 
+                a = int(input('\nEscolha o primeiro valor para a adicao:\n>'))
+                b = int(input('\nEscolha o segundo valor para a adicao:\n>'))
             
-            a = int(input('\nEscolha o primeiro valor para a adicao:\n>'))
-            b = int(input('\nEscolha o segundo valor para a adicao:\n>'))
-            
-            print(f'\nResultado: {server.add(a, b)}\n')
+                print(f'\nResultado: {server.add(a, b)}\n')
+            except ValueError:
+                 print("Por favor, insira valores inteiros válidos.")
             
         elif x == 2:
-        
-            a = int(input('\nEscolha o primeiro valor para a subtracao:\n>'))
-            b = int(input('\nEscolha o segundo valor para a subtracao:\n>'))
+            try: 
+                 a = int(input('\nEscolha o primeiro valor para a subtracao:\n>'))
+                 b = int(input('\nEscolha o segundo valor para a subtracao:\n>'))
                 
-            print(f'\nResultado: {server.sub(a, b)}\n')
+                 print(f'\nResultado: {server.sub(a, b)}\n')
+            except ValueError:
+                 print("Por favor, insira valores inteiros válidos.")
+
             
         elif x == 3:
-        
-            a = int(input('\nEscolha o primeiro valor para a multiplicacao:\n>'))
-            b = int(input('\nEscolha o segundo valor para a multiplicacao:\n>'))
+            try:
+                a = int(input('\nEscolha o primeiro valor para a multiplicacao:\n>'))
+                b = int(input('\nEscolha o segundo valor para a multiplicacao:\n>'))
             
-            print(f'\nResultado: {server.mult(a,b)}\n')
+                print(f'\nResultado: {server.mult(a,b)}\n')
+            except ValueError:
+                print("Por favor, insira valores inteiros válidos.")
+
             
         elif x == 4:
-        
-            a = int(input('\nEscolha o primeiro valor para a divisao:\n>'))
-            b = int(input('\nEscolha o segundo valor para a divisao:\n>'))
+           try:
+                a = int(input('\nEscolha o primeiro valor para a divisao:\n>'))
+                b = int(input('\nEscolha o segundo valor para a divisao:\n>'))
             
-            print(f'\nResultado: {server.div(a,b)}\n')    
+                print(f'\nResultado: {server.div(a,b)}\n')    
+           except ValueError:
+                print("Por favor, insira valores inteiros válidos.")
+
             
         else:
             print('\nTente novamente.\n')
