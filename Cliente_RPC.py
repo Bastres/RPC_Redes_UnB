@@ -32,16 +32,32 @@ class Cliente_RPC:
         return executar
         
 
+#funcoes stub
+def listarFuncoes():
+    return client.listarFuncoes()
+
+def add(a,b):
+    return client.add(a,b)
+
+def sub(a,b):
+    return client.sub(a,b)
+
+def mult(a,b):
+    return client.mult(a,b)
+
+def div(a,b):
+    return client.div(a,b)        
+
 client = Cliente_RPC()
 
 client.conectar()
 
 while True:
     try:
-        x = int(input('\nO que deseja fazer?\n\n0. Listar funcoes cadastradas\n1. ADD\n2. SUB\n3. MULT\n4. DIV\n>'))
+        x = int(input('\nO que deseja fazer?\n\n0. Listar funcoes cadastradas\n1. ADD\n2. SUB\n3. MULT\n4. DIV\n\n>'))
         
         if x == 0:
-            print('\nAs seguintes funcoes estao cadastradas em Servidor_RPC:')
+            print('\nAs seguintes funcoes estao cadastradas no Servidor_RPC:')
             print(client.listarFuncoes())
         
         elif x == 1:
@@ -49,7 +65,7 @@ while True:
                 a = int(input('\nEscolha o primeiro valor para a adicao:\n>'))
                 b = int(input('\nEscolha o segundo valor para a adicao:\n>'))
             
-                print(f'\nResultado: {client.add(a, b)}\n')
+                print(f'\nResultado: {add(a, b)}\n')
             except ValueError:
                  print("Por favor, insira valores inteiros válidos.")
             
@@ -58,7 +74,7 @@ while True:
                  a = int(input('\nEscolha o primeiro valor para a subtracao:\n>'))
                  b = int(input('\nEscolha o segundo valor para a subtracao:\n>'))
                 
-                 print(f'\nResultado: {client.sub(a, b)}\n')
+                 print(f'\nResultado: {sub(a, b)}\n')
             except ValueError:
                  print("Por favor, insira valores inteiros válidos.")
 
@@ -68,7 +84,7 @@ while True:
                 a = int(input('\nEscolha o primeiro valor para a multiplicacao:\n>'))
                 b = int(input('\nEscolha o segundo valor para a multiplicacao:\n>'))
             
-                print(f'\nResultado: {client.mult(a,b)}\n')
+                print(f'\nResultado: {mult(a,b)}\n')
             except ValueError:
                 print("Por favor, insira valores inteiros válidos.")
 
@@ -78,7 +94,7 @@ while True:
                 a = int(input('\nEscolha o primeiro valor para a divisao:\n>'))
                 b = int(input('\nEscolha o segundo valor para a divisao:\n>'))
             
-                print(f'\nResultado: {client.div(a,b)}\n')    
+                print(f'\nResultado: {div(a,b)}\n')    
            except ValueError:
                 print("Por favor, insira valores inteiros válidos.")
 
