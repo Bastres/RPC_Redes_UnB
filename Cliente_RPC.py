@@ -32,9 +32,9 @@ class Cliente_RPC:
         return executar
         
 
-server = Cliente_RPC()
+client = Cliente_RPC()
 
-server.conectar()
+client.conectar()
 
 while True:
     try:
@@ -45,7 +45,7 @@ while True:
                 a = int(input('\nEscolha o primeiro valor para a adicao:\n>'))
                 b = int(input('\nEscolha o segundo valor para a adicao:\n>'))
             
-                print(f'\nResultado: {server.add(a, b)}\n')
+                print(f'\nResultado: {client.add(a, b)}\n')
             except ValueError:
                  print("Por favor, insira valores inteiros válidos.")
             
@@ -54,7 +54,7 @@ while True:
                  a = int(input('\nEscolha o primeiro valor para a subtracao:\n>'))
                  b = int(input('\nEscolha o segundo valor para a subtracao:\n>'))
                 
-                 print(f'\nResultado: {server.sub(a, b)}\n')
+                 print(f'\nResultado: {client.sub(a, b)}\n')
             except ValueError:
                  print("Por favor, insira valores inteiros válidos.")
 
@@ -64,7 +64,7 @@ while True:
                 a = int(input('\nEscolha o primeiro valor para a multiplicacao:\n>'))
                 b = int(input('\nEscolha o segundo valor para a multiplicacao:\n>'))
             
-                print(f'\nResultado: {server.mult(a,b)}\n')
+                print(f'\nResultado: {client.mult(a,b)}\n')
             except ValueError:
                 print("Por favor, insira valores inteiros válidos.")
 
@@ -74,7 +74,7 @@ while True:
                 a = int(input('\nEscolha o primeiro valor para a divisao:\n>'))
                 b = int(input('\nEscolha o segundo valor para a divisao:\n>'))
             
-                print(f'\nResultado: {server.div(a,b)}\n')    
+                print(f'\nResultado: {client.div(a,b)}\n')    
            except ValueError:
                 print("Por favor, insira valores inteiros válidos.")
 
@@ -85,4 +85,4 @@ while True:
     except KeyboardInterrupt:
         break
 
-server.desconectar()
+client.desconectar()
