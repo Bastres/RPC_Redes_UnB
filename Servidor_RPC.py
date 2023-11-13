@@ -18,12 +18,12 @@ class Servidor_RPC:
 
     def __gerenciador__(self, cliente:socket.socket, endereco:tuple) -> None:
         print(f'Gerenciando requests do cliente {endereco[0]}:{endereco[1]}...\n')
-        print(f'> Cliente {endereco[0]}:{endereco[1]} conectou.')
+        print(f'> Cliente {endereco[0]}:{endereco[1]} conectou.\n')
         while True:
             try:
                 nomeFuncao, args, kwargs = json.loads(cliente.recv(1024).decode())
             except: 
-                print(f'> Cliente {endereco[0]}:{endereco[1]} desconectou.')
+                print(f'> Cliente {endereco[0]}:{endereco[1]} desconectou.\n')
                 break
             print(f'> Cliente {endereco[0]}:{endereco[1]} solicitou {nomeFuncao}({args})')
 
