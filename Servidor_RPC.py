@@ -18,7 +18,7 @@ class Servidor_RPC:
 
     def __gerenciador__(self, cliente:socket.socket, endereco:tuple) -> None:
         print(f'Gerenciando requests do cliente {endereco[0]}:{endereco[1]}...\n')
-        print(f'> Cliente {endereco[0]}:{endereco[1]} conectou.\n')
+        print(f'> Cliente {endereco[0]}:{endereco[1]} conectou.')
         while True:
             try:
                 nomeFuncao, args, kwargs = json.loads(cliente.recv(1024).decode())
@@ -52,7 +52,10 @@ class Servidor_RPC:
                 except KeyboardInterrupt:
                     print(f'\n\nServidor no host "{self.endereco[0]}" e porta "{self.endereco[1]}" interrompido.\n')
                     break
-                    
+
+def listarFuncoes():
+    return list(server._metodos)
+
 def add(a,b):
     return a+b
 
@@ -65,9 +68,6 @@ def mult(a,b):
 def div(a,b):
     return a/b
     
-def listarFuncoes():
-    return list(server._metodos)
-
 server = Servidor_RPC()
 
 server.registrarMetodo(listarFuncoes)
