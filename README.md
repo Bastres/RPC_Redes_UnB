@@ -31,4 +31,6 @@ valor recebido;</p>
 
 Integrantes do Grupo:
 
+- Caio Silva Batista - 211020820
+- Mateus Pereira da Silva - 190035145
 - Tiago Leão Buson - 200034162
