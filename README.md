@@ -28,3 +28,7 @@ requisição de RPC e aguardar pela resposta;
 valor recebido;</p>
 
 ## Data de entrega: 23/11/2023
+
+Integrantes do Grupo:
+
+- Tiago Leão Buson - 200034162
