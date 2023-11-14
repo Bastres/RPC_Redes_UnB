@@ -21,7 +21,7 @@ transparente (sem realizar nenhuma operação de rede ou captura de exceções f
 <br>
 
 – Caso o servidor de RPC não responda em um intervalo especificado, o cliente deve retransmitir a
-requisição de RPC e aguardar pela resposta;
+requisição de RPC e aguardar pela resposta; ✓
 <br>
 
 – Caso o cliente receba duas respostas para uma mesma requisição de RPC, deverá escolher o primeiro
