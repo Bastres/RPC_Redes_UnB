@@ -1,6 +1,5 @@
 import json
 import socket
-import inspect
 from threading import Thread
 
 class Servidor_RPC:
