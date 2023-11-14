@@ -1,7 +1,5 @@
 import json
 import socket
-import inspect
-from threading import Thread
 
 class Cliente_RPC:
     def __init__(self, host:str='localhost', porta:int=8080,timeout=5) -> None:
