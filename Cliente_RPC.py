@@ -1,4 +1,3 @@
-
 import json
 import socket
 import inspect
@@ -64,13 +63,13 @@ client.conectar()
 
 while True:
     try:
-        x = int(input('\nO que deseja fazer?\n\n0. Listar funcoes cadastradas\n1. ADD\n2. SUB\n3. MULT\n4. DIV\n\n>'))
+        x = input('\nO que deseja fazer?\n\n0. Listar funcoes cadastradas\n1. ADD\n2. SUB\n3. MULT\n4. DIV\n\n>')
         
-        if x == 0:
+        if x == '0':
             print('\nAs seguintes funcoes estao cadastradas no Servidor_RPC:')
             print(client.listarFuncoes())
         
-        elif x == 1:
+        elif x == '1':
             try: 
                 a = int(input('\nEscolha o primeiro valor para a adicao:\n>'))
                 b = int(input('\nEscolha o segundo valor para a adicao:\n>'))
@@ -79,7 +78,7 @@ while True:
             except ValueError:
                  print("Por favor, insira valores inteiros válidos.")
             
-        elif x == 2:
+        elif x == '2':
             try: 
                  a = int(input('\nEscolha o primeiro valor para a subtracao:\n>'))
                  b = int(input('\nEscolha o segundo valor para a subtracao:\n>'))
@@ -89,7 +88,7 @@ while True:
                  print("Por favor, insira valores inteiros válidos.")
 
             
-        elif x == 3:
+        elif x == '3':
             try:
                 a = int(input('\nEscolha o primeiro valor para a multiplicacao:\n>'))
                 b = int(input('\nEscolha o segundo valor para a multiplicacao:\n>'))
@@ -99,7 +98,7 @@ while True:
                 print("Por favor, insira valores inteiros válidos.")
 
             
-        elif x == 4:
+        elif x == '4':
            try:
                 a = int(input('\nEscolha o primeiro valor para a divisao:\n>'))
                 b = int(input('\nEscolha o segundo valor para a divisao:\n>'))
