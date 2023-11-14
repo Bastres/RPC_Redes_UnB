@@ -1,12 +1,14 @@
+
 import json
 import socket
 import inspect
 from threading import Thread
 
 class Cliente_RPC:
-    def __init__(self, host:str='localhost', porta:int=8080) -> None:
+    def __init__(self, host:str='localhost', porta:int=8080,timeout=5) -> None:
         self.sock = None
         self.endereco = (host, porta)
+        self.timeout = timeout
         
     def conectar(self):
         try:
@@ -21,14 +23,22 @@ class Cliente_RPC:
         except:
             pass
             
-    def __getattr__(self, __nome: str):
+    
+    def __getattr__(self, nome):
         def executar(*args, **kwargs):
-            self.sock.sendall(json.dumps((__nome, args, kwargs)).encode())
+            for i in range(3):
+                try:
+                    # Envia a chamada RPC para o servidor
+                    self.sock.sendall(json.dumps((nome, args, kwargs)).encode())
+                    self.sock.settimeout(self.timeout)
+                    # Recebe a resposta do servidor
+                    resposta = json.loads(self.sock.recv(1024).decode())
+                    return resposta
+                except socket.timeout:
+                    # Manipula o caso em que o tempo de espera excede
+                    #print(f"Tempo de espera excedido para a chamada {nome}. Tentando novamente...")
+                    self.sock.settimeout(self.timeout)
 
-            resposta = json.loads(self.sock.recv(1024).decode())
-   
-            return resposta
-        
         return executar
         
 
