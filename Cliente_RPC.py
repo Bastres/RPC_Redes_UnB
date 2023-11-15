@@ -65,7 +65,7 @@ while True:
         
         if x == '0':
             print('\nAs seguintes funcoes estao cadastradas no Servidor_RPC:')
-            print(client.listarFuncoes())
+            print(listarFuncoes())
         
         elif x == '1':
             try: 
