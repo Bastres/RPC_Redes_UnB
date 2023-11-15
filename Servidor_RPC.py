@@ -27,11 +27,11 @@ class Servidor_RPC:
             print(f'> Cliente {endereco[0]}:{endereco[1]} solicitou {nomeFuncao}({args})')
 
             try:
-                response = self._metodos[nomeFuncao](*args, **kwargs)
+                resposta = self._metodos[nomeFuncao](*args, **kwargs)
             except Exception as e:
                 cliente.sendall(json.dumps(str(e)).encode())
             else:
-                cliente.sendall(json.dumps(response).encode())
+                cliente.sendall(json.dumps(resposta).encode())
 
         print(f'\nOs requests do cliente {endereco[0]}:{endereco[1]} terminaram.\n')
         cliente.close()
