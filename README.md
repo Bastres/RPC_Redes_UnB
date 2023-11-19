@@ -25,7 +25,7 @@ requisição de RPC e aguardar pela resposta; ✓
 <br>
 
 – Caso o cliente receba duas respostas para uma mesma requisição de RPC, deverá escolher o primeiro
-valor recebido;</p> ✓
+valor recebido; ✓</p>
 
 ## Data de entrega: 23/11/2023
 
