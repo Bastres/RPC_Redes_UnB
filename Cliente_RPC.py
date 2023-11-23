@@ -24,6 +24,7 @@ class Cliente_RPC:
     def __getattr__(self, nome):
         def executar(*args, **kwargs):
             for i in range(3):
+                # REQUISITO 5
                 try:
                     # Envia a chamada RPC para o servidor
                     self.sock.sendall(json.dumps((nome, args, kwargs)).encode())
@@ -32,14 +33,17 @@ class Cliente_RPC:
                     resposta = json.loads(self.sock.recv(1024).decode())
                     return resposta
                 except socket.timeout:
+                    # REQUISITO 6
                     # Manipula o caso em que o tempo de espera excede
-                    #print(f"Tempo de espera excedido para a chamada {nome}. Tentando novamente...")
+                    print(f"Tempo de espera excedido para a chamada {nome}. Tentando novamente...")
                     self.sock.settimeout(self.timeout)
 
         return executar
         
 
-#funcoes stub
+#funcoes stub (REQUISITO 2 e 3)
+
+# REQUISITO 1
 def listarFuncoes():
     return client.listarFuncoes()
 

@@ -1,6 +1,7 @@
 import json
 import socket
 from threading import Thread
+import time
 
 class Servidor_RPC:
     def __init__(self, host:str='0.0.0.0', porta:int=8080) -> None:
@@ -28,10 +29,14 @@ class Servidor_RPC:
 
             try:
                 resposta = self._metodos[nomeFuncao](*args, **kwargs)
+                respostaFake = self._metodos['add'](*args, **kwargs)
             except Exception as e:
                 cliente.sendall(json.dumps(str(e)).encode())
             else:
+                print("Mandando Resposta Certa...")
                 cliente.sendall(json.dumps(resposta).encode())
+                print("Mandando Resposta Fake...")
+                cliente.sendall(json.dumps(respostaFake).encode())
 
         print(f'\nOs requests do cliente {endereco[0]}:{endereco[1]} terminaram.\n')
         cliente.close()
@@ -52,6 +57,7 @@ class Servidor_RPC:
                     print(f'\n\nServidor no host "{self.endereco[0]}" e porta "{self.endereco[1]}" interrompido.\n')
                     break
 
+# REQUISITO 4
 def listarFuncoes():
     return list(server._metodos)
 
@@ -62,6 +68,7 @@ def sub(a,b):
     return a-b
 
 def mult(a,b):
+    time.sleep(6)
     return a*b
 
 def div(a,b):
