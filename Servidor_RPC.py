@@ -21,22 +21,19 @@ class Servidor_RPC:
         print(f'> Cliente {endereco[0]}:{endereco[1]} conectou.')
         while True:
             try:
-                nomeFuncao, args, kwargs = json.loads(cliente.recv(1024).decode())
+                nomeFuncao, args, kwargs, requestId = json.loads(cliente.recv(1024).decode())
             except: 
                 print(f'> Cliente {endereco[0]}:{endereco[1]} desconectou.\n')
                 break
-            print(f'> Cliente {endereco[0]}:{endereco[1]} solicitou {nomeFuncao}({args})')
+            print(f'> Cliente {endereco[0]}:{endereco[1]} solicitou {nomeFuncao}({args}) ID: {requestId}')
 
             try:
                 resposta = self._metodos[nomeFuncao](*args, **kwargs)
-                respostaFake = self._metodos['add'](*args, **kwargs)
             except Exception as e:
                 cliente.sendall(json.dumps(str(e)).encode())
             else:
-                print("Mandando Resposta Certa...")
-                cliente.sendall(json.dumps(resposta).encode())
-                print("Mandando Resposta Fake...")
-                cliente.sendall(json.dumps(respostaFake).encode())
+                cliente.sendall(json.dumps((resposta, requestId)).encode())
+
 
         print(f'\nOs requests do cliente {endereco[0]}:{endereco[1]} terminaram.\n')
         cliente.close()

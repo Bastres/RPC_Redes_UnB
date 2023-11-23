@@ -1,11 +1,14 @@
 import json
 import socket
+import time
 
 class Cliente_RPC:
     def __init__(self, host:str='localhost', porta:int=8080,timeout=5) -> None:
         self.sock = None
         self.endereco = (host, porta)
         self.timeout = timeout
+        self.next_request_id = 0
+        self.respostas = {}
         
     def conectar(self):
         try:
@@ -19,19 +22,38 @@ class Cliente_RPC:
             self.sock.close()
         except:
             pass
+
+    def gerarId(self):
+        # Gera um id unico para cada requisição
+        requestId = self.next_request_id
+        self.next_request_id += 1
+        return requestId
             
     
     def __getattr__(self, nome):
         def executar(*args, **kwargs):
+            requestId = self.gerarId()
             for i in range(3):
                 # REQUISITO 5
                 try:
+                    
                     # Envia a chamada RPC para o servidor
-                    self.sock.sendall(json.dumps((nome, args, kwargs)).encode())
+                    self.sock.sendall(json.dumps((nome, args, kwargs, requestId)).encode())
                     self.sock.settimeout(self.timeout)
                     # Recebe a resposta do servidor
-                    resposta = json.loads(self.sock.recv(1024).decode())
-                    return resposta
+                    while True:
+                        resposta, respostaId = json.loads(self.sock.recv(1024).decode())
+                        self.respostas[respostaId] = resposta
+
+                        while respostaId != requestId:
+                            print(f"ID errado! ReqId: {requestId} ResId: {respostaId} Tentando novamente...")
+                            respostaRepetida, respostaRepetidaId = json.loads(self.sock.recv(1024).decode())
+                            respostaId += 1
+                            # self.respostas.append(respostaRepetida)
+                            self.respostas[respostaRepetidaId] = respostaRepetida
+                        break
+                    
+                    return self.respostas[requestId]
                 except socket.timeout:
                     # REQUISITO 6
                     # Manipula o caso em que o tempo de espera excede
@@ -57,7 +79,7 @@ def mult(a,b):
     return client.mult(a,b)
 
 def div(a,b):
-    return client.div(a,b)        
+    return client.div(a,b)      
 
 client = Cliente_RPC()
 
